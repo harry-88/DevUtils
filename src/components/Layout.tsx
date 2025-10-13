@@ -235,22 +235,7 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
       {/* Footer */}
       <footer className="relative border-t border-border/50 mt-20 bg-background/50 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center space-y-4">
-            <motion.div 
-              className="flex justify-center"
-              whileHover={{ scale: 1.1 }}
-            >
-              <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-            </motion.div>
-            <p className="text-muted-foreground">
-              Built with ❤️ using Next.js & Tailwind CSS
-            </p>
-            <p className="text-sm text-muted-foreground">
-              Fast, accessible, and beautiful developer tools
-            </p>
-          </div>
+        
         </div>
       </footer>
     </div>
