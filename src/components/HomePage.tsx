@@ -1,19 +1,18 @@
 import { 
   Clock, Scale, FileJson, FileCode, Shield, Image as ImageIcon, 
-  Sparkles, TrendingUp, Zap, Star
+  Sparkles, TrendingUp, Zap, Star,
+  Braces
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { motion } from 'motion/react';
 
-interface HomePageProps {
-  onNavigate: (tool: string) => void;
-}
-
-export function HomePage({ onNavigate }: HomePageProps) {
+export function HomePage() {
+  const navigate = useNavigate();
   const tools = [
     {
-      id: 'time',
+      id: '/time-converter',
       icon: Clock,
       title: 'Time Converter',
       description: 'Convert between time zones and formats with real-time updates',
@@ -22,7 +21,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       gradient: 'bg-gradient-to-br from-blue-500/10 to-cyan-500/10',
     },
     {
-      id: 'units',
+      id: '/unit-converter',
       icon: Scale,
       title: 'Unit Converter',
       description: 'Convert length, weight, volume, temperature, and data units',
@@ -31,7 +30,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       gradient: 'bg-gradient-to-br from-green-500/10 to-emerald-500/10',
     },
     {
-      id: 'json',
+      id: '/json-tools',
       icon: FileJson,
       title: 'JSON Tools',
       description: 'Format, validate, and explore JSON with interactive tree view',
@@ -40,7 +39,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       gradient: 'bg-gradient-to-br from-purple-500/10 to-pink-500/10',
     },
     {
-      id: 'xml',
+      id: '/xml-tools',
       icon: FileCode,
       title: 'XML Tools',
       description: 'Format, validate, and beautify XML documents instantly',
@@ -49,7 +48,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       gradient: 'bg-gradient-to-br from-orange-500/10 to-red-500/10',
     },
     {
-      id: 'password',
+      id: '/password-generator',
       icon: Shield,
       title: 'Password Generator',
       description: 'Create strong, secure passwords with customizable options',
@@ -58,7 +57,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       gradient: 'bg-gradient-to-br from-emerald-500/10 to-teal-500/10',
     },
     {
-      id: 'image',
+      id: '/image-tools',
       icon: ImageIcon,
       title: 'Image Tools',
       description: 'Resize and compress images for optimal web performance',
@@ -81,7 +80,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
       className="space-y-16"
     >
       {/* Hero Section */}
-      <div className="text-center space-y-8 py-12 relative">
+      <section className="text-center space-y-8 py-12 relative" aria-labelledby="hero-heading">
         <motion.div 
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
@@ -102,7 +101,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
               }}
             />
             <div className="relative h-24 w-24 rounded-3xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl">
-              <Sparkles className="h-12 w-12 text-white" />
+              <Braces className="h-12 w-12 text-white" />
             </div>
           </div>
         </motion.div>
@@ -113,7 +112,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
           transition={{ delay: 0.2 }}
           className="space-y-4"
         >
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl">
+          <h1 id="hero-heading" className="text-5xl sm:text-6xl lg:text-7xl">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Developer Tools
             </span>
@@ -153,18 +152,18 @@ export function HomePage({ onNavigate }: HomePageProps) {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </section>
 
       {/* Tools Grid */}
-      <div className="space-y-6">
+      <section className="space-y-6" aria-labelledby="tools-heading">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
           className="flex items-center gap-3"
         >
-          <h2 className="flex items-center gap-2">
-            <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" />
+          <h2 id="tools-heading" className="flex items-center gap-2">
+            <Star className="h-6 w-6 text-yellow-500 fill-yellow-500" aria-hidden="true" />
             Available Tools
           </h2>
         </motion.div>
@@ -182,7 +181,16 @@ export function HomePage({ onNavigate }: HomePageProps) {
               >
                 <Card
                   className={`cursor-pointer group overflow-hidden border-2 hover:border-primary/50 transition-all hover:shadow-2xl h-full ${tool.gradient}`}
-                  onClick={() => onNavigate(tool.id)}
+                  onClick={() => navigate(tool.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      navigate(tool.id);
+                    }
+                  }}
+                  aria-label={`Open ${tool.title} tool`}
                 >
                   <CardHeader className="relative">
                     <div className="flex items-start justify-between mb-4">
@@ -191,7 +199,7 @@ export function HomePage({ onNavigate }: HomePageProps) {
                         transition={{ duration: 0.5 }}
                         className={`h-14 w-14 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center shadow-lg`}
                       >
-                        <Icon className="h-7 w-7 text-white" />
+                        <Icon className="h-7 w-7 text-white" aria-hidden="true" />
                       </motion.div>
                     </div>
                     <CardTitle className="group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-primary/60 group-hover:bg-clip-text group-hover:text-transparent transition-all">
@@ -225,20 +233,22 @@ export function HomePage({ onNavigate }: HomePageProps) {
             );
           })}
         </div>
-      </div>
+      </section>
 
       {/* Features Section */}
-      <motion.div 
+      <motion.section 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
         className="border-t border-border/50 pt-16"
+        aria-labelledby="features-heading"
       >
+        <h2 id="features-heading" className="sr-only">Key Features</h2>
         <div className="grid gap-8 md:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <motion.div
+              <motion.article
                 key={feature.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -252,16 +262,16 @@ export function HomePage({ onNavigate }: HomePageProps) {
                   transition={{ duration: 0.5 }}
                 >
                   <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
-                    <Icon className="h-8 w-8 text-primary" />
+                    <Icon className="h-8 w-8 text-primary" aria-hidden="true" />
                   </div>
                 </motion.div>
-                <h3>{feature.title}</h3>
+                <h3 className="text-lg font-semibold">{feature.title}</h3>
                 <p className="text-muted-foreground">{feature.desc}</p>
-              </motion.div>
+              </motion.article>
             );
           })}
         </div>
-      </motion.div>
+      </motion.section>
     </motion.div>
   );
 }

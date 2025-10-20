@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://devutils.app/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all tools
+Allow: /time-converter
+Allow: /unit-converter
+Allow: /json-tools
+Allow: /xml-tools
+Allow: /password-generator
+Allow: /image-tools

@@ -9,6 +9,14 @@ import { toast } from 'sonner@2.0.3';
 import { motion } from 'motion/react';
 
 export function TimeConverter() {
+  // SEO: Update document title and meta description
+  useEffect(() => {
+    document.title = 'Time Converter - DevUtils | Free Timezone & Date Tools';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Convert between time zones and formats with real-time updates. Free time converter tool with multiple timezone support, custom date/time input, and ISO format conversion.');
+    }
+  }, []);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedTimezone, setSelectedTimezone] = useState('UTC');
   const [customDate, setCustomDate] = useState('');
@@ -66,6 +74,29 @@ export function TimeConverter() {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
+      {/* SEO: Structured data for Time Converter tool */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Time Converter",
+          "description": "Convert between time zones and formats with real-time updates",
+          "url": "https://devutils.app/time-converter",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Web Browser",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "featureList": [
+            "Real-time clock display",
+            "Multiple timezone support", 
+            "Custom date/time input",
+            "ISO format conversion"
+          ]
+        })}
+      </script>
       <div>
         <h1 className="mb-2 flex items-center gap-2">
           <Clock className="h-8 w-8" />

@@ -1,17 +1,20 @@
-import { Moon, Sun, Menu, X, Zap } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Moon, Sun, Menu, X, Zap, Braces } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { motion, AnimatePresence } from 'motion/react';
+import { useAnalytics } from '../hooks/useAnalytics';
 
 interface LayoutProps {
   children: React.ReactNode;
-  currentTool: string;
-  onNavigate: (tool: string) => void;
 }
 
-export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   const [isDark, setIsDark] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { trackToolUsage } = useAnalytics();
 
   useEffect(() => {
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
@@ -33,17 +36,26 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
   };
 
   const tools = [
-    { id: 'home', label: '🏠 Home' },
-    { id: 'time', label: '⏰ Time' },
-    { id: 'units', label: '⚖️ Units' },
-    { id: 'json', label: '📋 JSON' },
-    { id: 'xml', label: '📄 XML' },
-    { id: 'password', label: '🔐 Password' },
-    { id: 'image', label: '🖼️ Image' },
+    { id: '/', label: '🏠 Home', path: '/' },
+    { id: '/time-converter', label: '⏰ Time', path: '/time-converter' },
+    { id: '/unit-converter', label: '⚖️ Units', path: '/unit-converter' },
+    { id: '/json-tools', label: '📋 JSON', path: '/json-tools' },
+    { id: '/xml-tools', label: '📄 XML', path: '/xml-tools' },
+    { id: '/password-generator', label: '🔐 Password', path: '/password-generator' },
+    { id: '/image-tools', label: '🖼️ Image', path: '/image-tools' },
   ];
+
+  const currentTool = location.pathname;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/20">
+      {/* SEO: Skip to main content link for accessibility */}
+      {/* <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+      >
+        Skip to main content
+      </a> */}
       {/* Animated background elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -77,6 +89,7 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className="sticky top-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl shadow-sm"
+        role="banner"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
@@ -84,7 +97,7 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => onNavigate('home')}
+              onClick={() => navigate('/')}
               className="flex items-center gap-3 group"
             >
               <div className="relative">
@@ -100,7 +113,7 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
                   }}
                 />
                 <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
-                  <Zap className="h-5 w-5 text-white" />
+                  <Braces className="h-5 w-5 text-white" />
                 </div>
               </div>
               <div>
@@ -112,7 +125,7 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
             </motion.button>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden md:flex items-center gap-1" role="navigation" aria-label="Main navigation">
               {tools.map((tool, index) => (
                 <motion.div
                   key={tool.id}
@@ -121,10 +134,13 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
                   transition={{ delay: index * 0.05 }}
                 >
                   <Button
-                    variant={currentTool === tool.id ? 'default' : 'ghost'}
+                    variant={currentTool === tool.path ? 'default' : 'ghost'}
                     size="sm"
-                    onClick={() => onNavigate(tool.id)}
-                    className={currentTool === tool.id ? 'shadow-lg' : ''}
+                    onClick={() => {
+                      navigate(tool.path);
+                      trackToolUsage(tool.path.replace('/', ''), 'navigation_click');
+                    }}
+                    className={currentTool === tool.path ? 'shadow-lg' : ''}
                   >
                     {tool.label}
                   </Button>
@@ -200,10 +216,10 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
                   {tools.map((tool) => (
                     <Button
                       key={tool.id}
-                      variant={currentTool === tool.id ? 'secondary' : 'ghost'}
+                      variant={currentTool === tool.path ? 'secondary' : 'ghost'}
                       className="justify-start w-full"
                       onClick={() => {
-                        onNavigate(tool.id);
+                        navigate(tool.path);
                         setMobileMenuOpen(false);
                       }}
                     >
@@ -218,7 +234,7 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
       </motion.header>
 
       {/* Main Content */}
-      <main className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <main id="main-content" className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8" role="main">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentTool}
@@ -233,9 +249,16 @@ export function Layout({ children, currentTool, onNavigate }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="relative border-t border-border/50 mt-20 bg-background/50 backdrop-blur-sm">
+      <footer className="relative border-t border-border/50 mt-20 bg-background/50 backdrop-blur-sm" role="contentinfo">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-        
+          <div className="text-center text-muted-foreground">
+            <p>&copy; 2024 DevUtils. Free developer tools platform.</p>
+            <p className="mt-2 text-sm">
+              Built with React, TypeScript, and Tailwind CSS. 
+              <span className="mx-2">•</span>
+              Privacy-focused - all processing happens locally.
+            </p>
+          </div>
         </div>
       </footer>
     </div>
