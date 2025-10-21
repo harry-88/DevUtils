@@ -8,11 +8,11 @@ export const useAnalytics = () => {
   useEffect(() => {
     // Track page views
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'G-XXXXXXXXXX', {
-        page_path: location.pathname,
-        page_title: document.title,
-        page_location: window.location.href,
-      });
+    //   window.gtag('config', 'G-XXXXXXXXXX', {
+    //     page_path: location.pathname,
+    //     page_title: document.title,
+    //     page_location: window.location.href,
+    //   });
     }
   }, [location]);
 
