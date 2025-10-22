@@ -112,8 +112,8 @@ export function Layout({ children }: LayoutProps) {
                     ease: "easeInOut"
                   }}
                 />
-                <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center">
-                  <Braces className="h-5 w-5 text-white" />
+                <div className="relative h-15 w-15 s flex items-center justify-center">
+                  <img src="/logo.png" alt="DevUtils" className="h-10 w-10" />
                 </div>
               </div>
               <div>

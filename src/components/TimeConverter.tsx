@@ -7,16 +7,9 @@ import { Button } from './ui/button';
 import { Copy, Clock } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function TimeConverter() {
-  // SEO: Update document title and meta description
-  useEffect(() => {
-    document.title = 'Time Converter - DevUtils | Free Timezone & Date Tools';
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Convert between time zones and formats with real-time updates. Free time converter tool with multiple timezone support, custom date/time input, and ISO format conversion.');
-    }
-  }, []);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedTimezone, setSelectedTimezone] = useState('UTC');
   const [customDate, setCustomDate] = useState('');
@@ -69,7 +62,9 @@ export function TimeConverter() {
     : currentTime;
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.timeConverter} />
+      <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -246,5 +241,6 @@ export function TimeConverter() {
         </CardContent>
       </Card>
     </motion.div>
+    </>
   );
 }

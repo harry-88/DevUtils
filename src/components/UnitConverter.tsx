@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { ArrowRightLeft, Scale } from 'lucide-react';
 import { Button } from './ui/button';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function UnitConverter() {
   const [category, setCategory] = useState('length');
@@ -132,7 +133,9 @@ export function UnitConverter() {
   };
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.unitConverter} />
+      <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -267,5 +270,6 @@ export function UnitConverter() {
         ))}
       </Tabs>
     </motion.div>
+    </>
   );
 }

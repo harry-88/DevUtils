@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Copy, Check, ChevronRight, ChevronDown, FileJson } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function JSONTools() {
   const [input, setInput] = useState('');
@@ -81,7 +82,9 @@ export function JSONTools() {
   };
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.jsonTools} />
+      <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -219,6 +222,7 @@ export function JSONTools() {
         </Tabs>
       )}
     </motion.div>
+    </>
   );
 }
 

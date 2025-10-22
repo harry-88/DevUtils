@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout';
 import { Toaster } from './components/ui/sonner';
 
@@ -21,8 +22,9 @@ const LoadingSpinner = () => (
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
+    <HelmetProvider>
+      <Router>
+        <Routes>
         <Route path="/" element={
           <Layout>
             <Suspense fallback={<LoadingSpinner />}>
@@ -83,5 +85,6 @@ export default function App() {
       </Routes>
       <Toaster />
     </Router>
+    </HelmetProvider>
   );
 }

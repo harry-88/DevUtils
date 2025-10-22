@@ -8,6 +8,7 @@ import { Switch } from './ui/switch';
 import { Copy, RefreshCw, Shield, Check } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function PasswordGenerator() {
   const [password, setPassword] = useState('');
@@ -72,7 +73,9 @@ export function PasswordGenerator() {
   };
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.passwordGenerator} />
+      <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -206,5 +209,6 @@ export function PasswordGenerator() {
         </CardContent>
       </Card>
     </motion.div>
+    </>
   );
 }

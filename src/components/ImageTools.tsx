@@ -6,6 +6,7 @@ import { Input } from './ui/input';
 import { Image as ImageIcon, Upload, Download } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function ImageTools() {
   const [originalImage, setOriginalImage] = useState<string>('');
@@ -87,7 +88,9 @@ export function ImageTools() {
   };
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.imageTools} />
+      <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -220,5 +223,6 @@ export function ImageTools() {
         </motion.div>
       )}
     </motion.div>
+    </>
   );
 }

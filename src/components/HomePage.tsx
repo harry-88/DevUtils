@@ -1,3 +1,4 @@
+import React from 'react';
 import { 
   Clock, Scale, FileJson, FileCode, Shield, Image as ImageIcon, 
   Sparkles, TrendingUp, Zap, Star,
@@ -7,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -74,7 +76,9 @@ export function HomePage() {
   ];
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.home} />
+      <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="space-y-16"
@@ -100,8 +104,8 @@ export function HomePage() {
                 ease: "linear"
               }}
             />
-            <div className="relative h-24 w-24 rounded-3xl bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl">
-              <Braces className="h-12 w-12 text-white" />
+            <div className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-3xl flex items-center justify-center shadow-2xl">
+              <img src="/logo.png" alt="DevUtils"   className="h-20 w-20 sm:h-32 sm:w-32" />
             </div>
           </div>
         </motion.div>
@@ -273,5 +277,7 @@ export function HomePage() {
         </div>
       </motion.section>
     </motion.div>
+
+    </>
   );
 }

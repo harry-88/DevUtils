@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Copy, Check, FileCode } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { motion } from 'motion/react';
+import { SEO, SEOConfigs } from './SEO';
 
 export function XMLTools() {
   const [input, setInput] = useState('');
@@ -109,7 +110,9 @@ export function XMLTools() {
   };
 
   return (
-    <motion.div 
+    <>
+      <SEO {...SEOConfigs.xmlTools} />
+      <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
@@ -173,5 +176,6 @@ export function XMLTools() {
         </CardContent>
       </Card>
     </motion.div>
+    </>
   );
 }
