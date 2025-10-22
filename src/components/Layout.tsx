@@ -252,12 +252,30 @@ export function Layout({ children }: LayoutProps) {
       <footer className="relative border-t border-border/50 mt-20 bg-background/50 backdrop-blur-sm" role="contentinfo">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center text-muted-foreground">
-            <p>&copy; 2024 DevUtils. Free developer tools platform.</p>
-            <p className="mt-2 text-sm">
-              Built with React, TypeScript, and Tailwind CSS. 
-              <span className="mx-2">•</span>
-              Privacy-focused - all processing happens locally.
-            </p>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-base font-medium"
+            >
+              &copy; 2025 DevUtils. Free developer tools platform.
+            </motion.p>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-3 text-sm flex items-center justify-center gap-2 flex-wrap"
+            >
+
+              <span className="flex items-center gap-1">
+                Tool built by <a href="https://binarybursts.com/" className="text-blue-500 hover:text-blue-600">BinaryBursts</a>
+              </span>
+              <span className="text-border">•</span>
+              <span className="flex items-center gap-1">
+                Privacy-focused - all processing happens locally
+              </span>
+            </motion.p>
           </div>
         </div>
       </footer>
