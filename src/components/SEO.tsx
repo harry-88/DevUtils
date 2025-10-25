@@ -96,7 +96,7 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "DevUtils",
       "description": "Free developer tools platform with JSON, Time, Unit Converters, Password Generator, XML Tools, and Image Utilities",
-      "url": "https://devutils.com",
+      "url": "https://dev-utils-nine.vercel.app",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "Web Browser",
       "offers": {
@@ -125,7 +125,7 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "Time Converter",
       "description": "Convert between different time zones and time formats instantly",
-      "url": "https://devutils.com/time-converter",
+      "url": "https://dev-utils-nine.vercel.app/time-converter",
       "applicationCategory": "UtilityApplication"
     }
   },
@@ -140,7 +140,7 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "Unit Converter",
       "description": "Convert between different units of length, weight, volume, temperature, and data",
-      "url": "https://devutils.com/unit-converter",
+      "url": "https://dev-utils-nine.vercel.app/unit-converter",
       "applicationCategory": "UtilityApplication"
     }
   },
@@ -155,7 +155,7 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "JSON Tools",
       "description": "Format, validate, and beautify JSON data with interactive tree view",
-      "url": "https://devutils.com/json-tools",
+      "url": "https://dev-utils-nine.vercel.app/json-tools",
       "applicationCategory": "DeveloperApplication"
     }
   },
@@ -170,7 +170,7 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "XML Tools",
       "description": "Format, validate, and beautify XML documents",
-      "url": "https://devutils.com/xml-tools",
+      "url": "https://dev-utils-nine.vercel.app/xml-tools",
       "applicationCategory": "DeveloperApplication"
     }
   },
@@ -185,7 +185,7 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "Password Generator",
       "description": "Generate strong, secure passwords with customizable options",
-      "url": "https://devutils.com/password-generator",
+      "url": "https://dev-utils-nine.vercel.app/password-generator",
       "applicationCategory": "SecurityApplication"
     }
   },
@@ -200,8 +200,23 @@ export const SEOConfigs = {
       "@type": "WebApplication",
       "name": "Image Tools",
       "description": "Resize and compress images for optimal web performance",
-      "url": "https://devutils.com/image-tools",
+      "url": "https://dev-utils-nine.vercel.app/image-tools",
       "applicationCategory": "MultimediaApplication"
+    }
+  },
+  
+  wordCounter: {
+    title: 'Word Counter - Count Words, Characters, Sentences | DevUtils',
+    description: 'Count words, characters, sentences, and paragraphs in your text instantly. Free online word counter tool with detailed statistics and analysis.',
+    keywords: 'word counter, character counter, sentence counter, paragraph counter, text analysis, word count tool, online word counter, text statistics',
+    canonical: '/word-counter',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Word Counter",
+      "description": "Count words, characters, sentences, and paragraphs in your text instantly",
+      "url": "https://dev-utils-nine.vercel.app/word-counter",
+      "applicationCategory": "UtilityApplication"
     }
   }
 };

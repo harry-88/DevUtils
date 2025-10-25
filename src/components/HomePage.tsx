@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Clock, Scale, FileJson, FileCode, Shield, Image as ImageIcon, 
   Sparkles, TrendingUp, Zap, Star,
-  Braces
+  Braces, FileText
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
@@ -66,6 +66,15 @@ export function HomePage() {
       color: 'from-pink-500 to-rose-500',
       tags: ['Media'],
       gradient: 'bg-gradient-to-br from-pink-500/10 to-rose-500/10',
+    },
+    {
+      id: '/word-counter',
+      icon: FileText,
+      title: 'Word Counter',
+      description: 'Count words, characters, sentences, and paragraphs instantly',
+      color: 'from-indigo-500 to-blue-500',
+      tags: ['Writing', 'Utility'],
+      gradient: 'bg-gradient-to-br from-indigo-500/10 to-blue-500/10',
     },
   ];
 
@@ -138,7 +147,7 @@ export function HomePage() {
           className="flex justify-center gap-8 flex-wrap"
         >
           {[
-            { number: '6+', label: 'Tools' },
+            { number: '7+', label: 'Tools' },
             { number: '100%', label: 'Free' },
             { number: '0ms', label: 'Latency' },
           ].map((stat, index) => (

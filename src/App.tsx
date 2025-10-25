@@ -12,6 +12,7 @@ const JSONTools = lazy(() => import('./components/JSONTools').then(module => ({ 
 const XMLTools = lazy(() => import('./components/XMLTools').then(module => ({ default: module.XMLTools })));
 const PasswordGenerator = lazy(() => import('./components/PasswordGenerator').then(module => ({ default: module.PasswordGenerator })));
 const ImageTools = lazy(() => import('./components/ImageTools').then(module => ({ default: module.ImageTools })));
+const WordCounter = lazy(() => import('./components/WordCounter').then(module => ({ default: module.WordCounter })));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -71,6 +72,13 @@ export default function App() {
           <Layout>
             <Suspense fallback={<LoadingSpinner />}>
               <ImageTools />
+            </Suspense>
+          </Layout>
+        } />
+        <Route path="/word-counter" element={
+          <Layout>
+            <Suspense fallback={<LoadingSpinner />}>
+              <WordCounter />
             </Suspense>
           </Layout>
         } />

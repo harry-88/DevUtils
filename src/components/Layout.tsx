@@ -43,6 +43,7 @@ export function Layout({ children }: LayoutProps) {
     { id: '/xml-tools', label: '📄 XML', path: '/xml-tools' },
     { id: '/password-generator', label: '🔐 Password', path: '/password-generator' },
     { id: '/image-tools', label: '🖼️ Image', path: '/image-tools' },
+    { id: '/word-counter', label: '📝 Words', path: '/word-counter' },
   ];
 
   const currentTool = location.pathname;
